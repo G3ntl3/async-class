@@ -7,24 +7,41 @@
   </head>
   <body>
     <button onclick="getinfo()">get info</button>
+    <button onclick="getinfo2()">get info</button>
+    <div id="display"></div>
   </body>
 
   <script>
     const endpoint = "https://jsonplaceholder.typicode.com/users";
-
-    const getinfo = async() => {
-try{
-    let response= await fetch(endpoint)
-    console.log(await response.json());
     
-}catch(error){
-    console.log(error);
-    
-}
+    const endpoint2='https://api.github.com/users'
 
-
-
-
+    const getinfo = async () => {
+      try {
+        let response = await fetch(endpoint);
+        console.log(await response.json());
+      } catch (error) {
+        console.log(error);
+      }
     };
+
+
+    const getinfo2=()=>{
+        fetch(endpoint2)
+        .then(response=>response.json())
+        .then(newResponse=>{
+            console.log(newResponse);
+            newResponse.map((details, i)=>{
+display.innerHTML+=` 
+<p>${details.login}
+<img src=${details.avatar_url}> style= width='100px'; height='100'`
+            })
+
+
+        })
+
+
+
+    }
   </script>
 </html>
